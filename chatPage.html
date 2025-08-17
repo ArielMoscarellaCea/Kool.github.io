@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOOL - AI Assistant</title>
+    <link rel="icon" href="img/KOOL - sin fondo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/chatPage.css">
+    </head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <a href="index.html"><div class="brand-name"><img src="img/KOOL - sin fondo.png" width="150" height="100" alt="" ></div></a>
+        </div>
+        <div class="header-controls">
+            <button class="new-chat-btn" onclick="startNewChat()">+ Nueva Conversación</button>
+            <a href="dashboard.html"><div class="user-avatar">K</div></a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">Conversaciones</h3>
+                <input type="text" class="search-box" placeholder="Buscar conversaciones...">
+            </div>
+            <div class="chat-history">
+                <div class="chat-item active" onclick="loadChat(1)">
+                    <div class="chat-time">Hoy</div>
+                    <div class="chat-title">Ayudame con mi pitch de Spotify</div>
+                    <div class="chat-preview">¿Podrías explicarme qué es la inteligencia artificial?</div>
+                </div>
+                <div class="chat-item" onclick="loadChat(2)">
+                    <div class="chat-time">Ayer</div>
+                    <div class="chat-title">¿Cuanto deberia cobrar mi entrada?</div>
+                    <div class="chat-preview">Necesito ideas para una cena italiana auténtica...</div>
+                </div>
+                <div class="chat-item" onclick="loadChat(3)">
+                    <div class="chat-time">2 días</div>
+                    <div class="chat-title">Que opinas de este contrato?</div>
+                    <div class="chat-preview">¿Cuáles son las mejores prácticas en JavaScript?</div>
+                </div>
+                <div class="chat-item" onclick="loadChat(4)">
+                    <div class="chat-time">1 semana</div>
+                    <div class="chat-title">Planifica mi campaña en redes sociales</div>
+                    <div class="chat-preview">Ayúdame a planificar un viaje a Japón por 2 semanas</div>
+                </div>
+                <div class="chat-item" onclick="loadChat(5)">
+                    <div class="chat-time">1 semana</div>
+                    <div class="chat-title">Análisis de marketing</div>
+                    <div class="chat-preview">¿Puedes analizar las tendencias del mercado crypto?</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Area -->
+        <main class="chat-area">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-logo"><img src="img/KOOL - sin fondo.png" width="350" height="250" alt=""></div>
+                <!--<h1 class="welcome-title">¿En qué puedo ayudarte?</h1>-->
+                 <p class="welcome-subtitle">
+                   Hey, “X”, I’m KOOL. Are you?
+
+                </p>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages" style="display: none;">
+                <!-- Messages will be dynamically added here -->
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-avatar" style="background: linear-gradient(135deg, #b63c3c, #b50000);">🤖</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Input Area -->
+    <div class="input-area">
+        <div class="input-container">
+            <textarea 
+                class="message-input" 
+                id="messageInput" 
+                placeholder="Escribe tu mensaje aquí..."
+                rows="1"
+                onkeydown="handleKeyPress(event)"
+                oninput="autoResize(this)"
+            ></textarea>
+            <button class="send-button" id="sendButton" onclick="sendMessage()"></button>
+            
+            <div class="quick-options input-container" id="quick-options" aria-label="Opciones rápidas (1–6)">
+            <button class="option-pill" type="button" data-value="1" aria-pressed="false">Pitch for Spotify</button>
+            <button class="option-pill" type="button" data-value="2" aria-pressed="false">Social Media</button>
+            <button class="option-pill" type="button" data-value="3" aria-pressed="false">Marketing</button>
+            <button class="option-pill" type="button" data-value="4" aria-pressed="false">Publishing</button>
+            <button class="option-pill" type="button" data-value="5" aria-pressed="false">Live Shows</button>
+            <button class="option-pill" type="button" data-value="6" aria-pressed="false">Contracts</button>
+        </div>
+        </div>
+         
+    </div>
+   
+<br>
+    <script src="js/chatPage.js"></script>
+    </body>
+</html>

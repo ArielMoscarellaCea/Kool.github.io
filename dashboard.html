@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="icon" href="img/KOOL - sin fondo.png" type="image/x-icon">
+  <title>Dashboard</title>
+  <link rel="icon" href="img/KOOL - sin fondo.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/dashboard.css">
+ 
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="">
+      <div class="logo"><img src="/img/KOOL - sin fondo.png" width="150" height="100" alt=""></div>
+    </div>
+
+    <br>
+    <div class="side-section-title">Menú</div>
+    <nav class="nav">
+      <a href="#" class="active">🏠 <span>Inicio</span></a>
+      <a href="#">📊 <span>Analítica</span></a>
+      <a href="#">📅 <span>Calendario</span></a>
+      <a href="#">⚙️ <span>Ajustes</span></a>
+    </nav>
+
+    <div class="stat-mini">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <strong>Uso mensual</strong>
+        <span class="pill" id="mini-usage">0%</span>
+      </div>
+      <svg class="progress-ring" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" />
+            <stop offset="100%" stop-color="var(--accent-2)" />
+          </linearGradient>
+        </defs>
+        <circle class="bg" cx="60" cy="60" r="52" fill="none" stroke-width="12" />
+        <circle class="fg" id="ringFg" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="326" stroke-dashoffset="326" />
+        <text x="60" y="66" text-anchor="middle" fill="white" font-size="20" font-weight="800" id="ringLabel">0%</text>
+      </svg>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div>
+          <div class="side-section-title" style="margin:0 0 4px 0;">Disco</div>
+          <div>304.5 GB</div>
+        </div>
+        <div>
+          <div class="side-section-title" style="margin:0 0 4px 0;">Plan</div>
+          <div>Premium</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="tabs">
+    </div>
+    <div class="search">
+      🔎
+      <input placeholder="Buscar..." />
+    </div>
+    <button class="icon-btn" title="Notificaciones">🔔</button>
+    <button class="icon-btn" title="Usuario">👤</button>
+    <button class="icon-btn" title="Menú">≡</button>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <section class="left">
+      <div class="cards">
+        <div class="card">
+          <h4>Dolor sit amet</h4>
+          <div class="metric">
+            <div class="value" id="m1">0</div>
+            <span class="pill">↗ Hoy</span>
+          </div>
+          <div class="chart" id="spark1"></div>
+        </div>
+        <div class="card">
+          <h4>Conversiones</h4>
+          <div class="metric">
+            <div class="value"><span id="p1">51</span>%</div>
+            <span class="pill" style="background:rgba(52,211,153,.12); border-color:rgba(52,211,153,.25); color:#b7ffdf;">+3.2%</span>
+          </div>
+          <div class="chart" id="spark2"></div>
+        </div>
+        <div class="card">
+          <h4>Retención</h4>
+          <div class="metric">
+            <div class="value"><span id="p2">28</span>%</div>
+            <span class="pill" style="background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.25); color:#ffd0d0;">-1.1%</span>
+          </div>
+          <div class="chart" id="spark3"></div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+          <strong>Líneas comparativas</strong>
+          <div class="legend">
+            <span><span class="dot a"></span>Serie A</span>
+            <span><span class="dot b"></span>Serie B</span>
+          </div>
+        </div>
+        <div class="chart" id="lineChart"></div>
+      </div>
+    </section>
+
+    <section class="right" style="display:grid; gap:16px;">
+      <div class="panel">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+          <strong>Barras por categoría</strong>
+          <div class="legend bar-legend">
+            <span><span class="dot a"></span>Visitas</span>
+          </div>
+        </div>
+        <div class="chart" id="barChart"></div>
+      </div>
+
+      <div class="panel grid-2">
+        <div>
+          <strong style="display:block; margin-bottom:8px;">Progreso</strong>
+          <div class="chart" id="areaChart"></div>
+        </div>
+        <div>
+          <strong style="display:block; margin-bottom:8px;">Actividad</strong>
+          <div class="chart" id="lineSmall"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/dashboard.js"></script>
+
+</body>
+</html>

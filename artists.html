@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOOL - For Artists</title>
+    <link rel="icon" href="img/KOOL - sin fondo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/artists.css">
+</head>
+<body>
+    <header class="header">
+        <div style="display: flex; align-items: center; gap: 60px;">
+            <a href="index.html"><div class="logo"><img src="img/KOOL - sin fondo.png" width="150" height="100" alt=""></div></a>
+        </div>
+        
+        <nav class="nav-right">
+            <a href="chatPage.html" onclick="showMessage('Chat kool cargando...')">Chat Kool</a>
+            <a href="pruebas.html" onclick="showMessage('Chat kool cargando...')">Dashboard</a>
+            <div class="auth-buttons">
+                <a href="#" class="btn-login" onclick="showMessage('Iniciando sesión...')">Log In</a>
+                <a href="#" class="btn-signup" onclick="showMessage('Creando cuenta...')">Sign Up</a>
+            </div>
+            <div class="language-selector">
+                <span>🌐 English</span>
+                <span style="margin-left: 5px;">ⓘ</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+           <div class="container">
+        <!-- Animated background elements -->
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+
+        <!-- Interactive dots -->
+        <div class="interactive-dot dot-1"></div>
+        <div class="interactive-dot dot-2"></div>
+        <div class="interactive-dot dot-3"></div>
+
+        <div class="dashboard-container">
+            <!-- Left Dashboard Card -->
+            <div class="dashboard-card left-card">
+                <div class="card-header">Dashboard</div>
+                <div class="card-title">Full access to all your data, take control of your music.</div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">$50,000</div>
+                        <div class="stat-label">Total Revenue</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">$25</div>
+                        <div class="stat-label">Average Sale Price</div>
+                    </div>
+                </div>
+
+                <div class="artist-profile">
+                    <div class="artist-avatar">S</div>
+                    <div class="artist-name">Artist Profile</div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <h1 class="hero-title">
+                    EMPOWERING ARTISTS<br>
+                    WITH REAL<br>
+                    TOOLS</h1>
+                <p class="subtitle">Develop strategies with AI Agents to grow your artistic project</p>
+                <br>
+                <div class="cta-buttons">
+                    <a href="chatPage.html"><button class="btn btn-primary" onclick="">Chat with KOOL</button></a>
+                </div>
+                <br>
+                <div class="central-artist"><img class="imagen-artista" src="img/fan-2.jpg" width="250" height="250" alt=""></div>
+            </div>
+
+            <!-- Right Fan Connect Card -->
+            <div class="dashboard-card right-card">
+                <div class="card-header">Fan Connect</div>
+                <div class="card-title">Marketing tool to send direct campaigns to your fans.</div>
+                <div class="card-description">Data Only available to selected artists</div>
+                
+                <div class="connect-features">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-icon">📧</div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <div style="font-size: 0.9rem; opacity: 0.7;">SMS  |  Email</div>
+                </div>
+
+                <div style="margin-top: 20px; display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 40px; height: 40px; background: #333; border-radius: 4px;"></div>
+                    <div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">New Release</div>
+                        <div style="font-size: 0.7rem; opacity: 0.6;">Album artwork</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <section class="rewards-section">
+      <h2 class="rewards-title"> ELEVATING YOUR MUSIC IS NOW POSSIBLE</h2>
+      <p class="rewards-subtitle">We give you the insights and tools a pro manager would - without the middleman.</p>
+
+      <div class="rewards-grid">
+        <div class="reward-card community">
+            <img src="img/menu-1.jpg" alt="Comunidad">
+            <h3>#1 – STEP AWAY FROM TRADITION</h3>
+            <p>No contracts. No royalties taken. No sneaky payments.</p>
+        </div>
+
+        <div class="reward-card experiences">
+            <img src="img/menu-2.jpg" alt="Experiencias">
+            <h3>#2 – TRACK YOUR SUCCESS</h3>
+            <p>See your growth in real time with our KOOL dashboard.</p>
+        </div>
+
+        <div class="reward-card content">
+            <img src="img/menu-3.jpg" alt="Contenido">
+            <h3>#3 – LET KOOL DO THE WORK</h3>
+            <p>We handle the admin, strategy, and operations — you focus on making music.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Show Data (⚠️ Si no usas React, cambia className → class y quita expresiones JS) -->
+    <!-- Dejo este bloque tal cual lo enviaste; si no compilas JSX/React, no funcionará en navegador plano. -->
+
+    <!-- Marquee infinito -->
+    <section class="ticker" aria-label="Let’s get even">
+      <div class="ticker__wrap">
+        <div class="ticker__track">
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+          <span class="ticker__item">LET'S MAKE IT KOOL • </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección: Paga lo que quieras -->
+    <section class="pay-section" id="pay-section">
+      <div class="pay-container">
+        <div class="pay-left">
+          <span class="artists-subtitle">KOOL</span>
+          <h2 class="pay-title">
+            <span>PAY WHAT</span><br>
+            <span>YOU NEED,</span><br>
+            <span>PAY HOW</span><br>
+            <span>YOU WANT</span>
+          </h2>
+
+          <p class="pay-lead">
+            Flexible pay-as-you go credit system of KOOL coins. Every strategy is worth a set of KOOL coins.
+          </p>
+
+          <p class="pay-copy">
+            KOOL admits global payments, over 100 currencies, and flexible payment options, including:
+          </p>
+
+          <ul class="pay-badges">
+            <li class="badge"><img src="img/payments/mastercard.svg" alt="" onerror="this.replaceWith(document.createTextNode('Mastercard'))"></li>
+            <li class="badge"><img src="img/payments/visa.svg" alt="" onerror="this.replaceWith(document.createTextNode('Visa'))"></li>
+            <li class="badge"><img src="img/payments/Uala.png" alt="" onerror="this.replaceWith(document.createTextNode('Ualá'))"></li>
+            <li class="badge"><img src="img/payments/mercadopago.svg" alt="" onerror="this.replaceWith(document.createTextNode('Mercado Pago'))"></li>
+            <li class="badge"><img src="img/payments/applepay.svg" alt="" onerror="this.replaceWith(document.createTextNode('Apple Pay'))"></li>
+            <li class="badge"><img src="img/payments/googlepay.svg" alt="" onerror="this.replaceWith(document.createTextNode('Google Pay'))"></li>
+          </ul>
+        </div>
+
+        <div class="pay-right">
+          <div class="film-frame">
+            <video class="pay-video" autoplay muted loop playsinline preload="metadata" poster="img/pay-poster.jpg">
+              <source src="video/koolCoin.mp4" type="video/mp4">
+            
+              Tu navegador no soporta el video HTML5.
+            </video>
+            <div class="film-grain" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- ================== SELL MUSIC FIRST ================== -->
+<section class="smf-section" aria-label="Comparativa de ingresos">
+    <h2 class="rewards-title">TO MAKE $1,000 ON STREAMING PLATFORMS YOU NEED 300,000 STREAMS</h2>
+    <br>
+    <span class="rewards-subtitle">ONLY 1% OF ARTISTS EVER GET THERE</span>
+    <br>
+    <br>
+  <div class="smf-grid">
+    <!-- Aro / meta -->
+    <div class="smf-ring-wrap">
+      <div class="smf-ring" aria-hidden="true">
+        <div class="smf-ring-inner">
+          <div class="smf-ring-kicker">What it takes to be in the</div>
+          <div class="smf-ring-amount" id="smfBigAmount">1%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streaming Only -->
+    <article class="smf-card" role="region" aria-labelledby="smf-c1">
+      <h3 id="smf-c1" class="smf-card-title">“STREAMING ONLY”: TRADITIONAL MODEL </h3>
+
+      <h4 id="smf-c1" class="smf-card" style="color: grey;">Hard to even get signed — and then they take 90% of your royalties</h4>
+
+      <h4 id="smf-c1" class="smf-card" style="color: grey;">Thousands of dollars in salaries — not scalable</h4>
+
+      <h4 id="smf-c1" class="smf-card" style="color: grey;">Begging friends for support — not sustainable</h4>
+
+      <h4 id="smf-c1" class="smf-card" style="color: grey;">Headache from not knowing which strategy to use or how to grow</h4>
+       <!-- <div class="smf-rows">
+         <div class="smf-row">
+          <div class="smf-label">Hard to even get signed <br>
+            — and then they take <br>
+            90% of your royalties</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Fans Needed:</div>
+          <div class="smf-value smf-counter" data-value="2325580" data-format="int">0</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">$ / Stream:</div>
+          <div class="smf-value smf-counter" data-value="0.0043" data-format="fixed4">0.0000</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Payout:</div>
+          <div class="smf-value">60–90 Days</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Data:</div>
+          <div class="smf-value">Demographics Only</div>
+        </div>
+      </div>-->
+    </article>
+
+    <!-- A Release with EVEN -->
+    <article class="smf-card" role="region" aria-labelledby="smf-c2">
+      <h3 id="smf-c2" class="smf-card-title">“A RELEASE WITH KOOL”: <span class="smf-accent">KOOL’S</span> MODEL</h3>
+
+
+      <h4 id="smf-c1" class="smf-card">No royalties, no locked-in contracts</h4>
+
+      <h4 id="smf-c1" class="smf-card">No salaries — just a pay-as-you-go credit system with KOOL COINS</h4>
+
+      <h4 id="smf-c1" class="smf-card">KOOL helps you design your strategies </h4>
+
+      <h4 id="smf-c1" class="smf-card">Easily, quickly, and effectively</h4>
+
+      <!-- <div class="smf-rows">
+        <div class="smf-row">
+          <div class="smf-label">Releases Sold:</div>
+          <div class="smf-value smf-counter" data-value="2000" data-format="int">0</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Fans Needed:</div>
+          <div class="smf-value smf-counter" data-value="2000" data-format="int">0</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">$ / Fan:</div>
+          <div class="smf-value smf-counter" data-value="25" data-format="money">0</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Payout:</div>
+          <div class="smf-value">Daily</div>
+        </div>
+        <div class="smf-row">
+          <div class="smf-label">Fan Data:</div>
+          <div class="smf-value">Full Access</div>
+        </div>
+      </div>-->
+    </article>
+  </div>
+</section>
+<!-- ====================================================== -->
+
+    <!-- HECHO CON ORGULLO EN 
+    <section class="made-section" aria-label="Hecho con orgullo en">
+      <h2 class="made-title">HECHO CON ORGULLO EN</h2>
+
+      <div class="marquee marquee--flags marquee--rtl">
+        <div class="marquee__mask">
+          <div class="marquee__track">
+            <img src="https://kapowaz.github.io/circle-flags/flags/mx.svg"  alt="México"            class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/hn.svg"  alt="Honduras"          class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ni.svg"  alt="Nicaragua"         class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ec.svg"  alt="Ecuador"           class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/cr.svg"  alt="Costa Rica"        class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/co.svg"  alt="Colombia"          class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ng.svg"  alt="Nigeria"           class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/us.svg"  alt="Estados Unidos"    class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ve.svg"  alt="Venezuela"         class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/br.svg"  alt="Brasil"            class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/pe.svg"  alt="Perú"              class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ar.svg"  alt="Argentina"         class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/mx.svg"  alt="México"            class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/hn.svg"  alt="Honduras"          class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ni.svg"  alt="Nicaragua"         class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ec.svg"  alt="Ecuador"           class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/cr.svg"  alt="Costa Rica"        class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/co.svg"  alt="Colombia"          class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ng.svg"  alt="Nigeria"           class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/us.svg"  alt="Estados Unidos"    class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ve.svg"  alt="Venezuela"         class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/br.svg"  alt="Brasil"            class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/pe.svg"  alt="Perú"              class="flag">
+            <img src="https://kapowaz.github.io/circle-flags/flags/ar.svg"  alt="Argentina"         class="flag">
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee marquee--covers marquee--ltr" aria-label="Releases">
+        <div class="marquee__mask">
+          <div class="marquee__track">
+            <img src="img/covers/01.jpg" alt="" class="cover">
+            <img src="img/covers/02.jpg" alt="" class="cover">
+            <img src="img/covers/03.jpg" alt="" class="cover">
+            <img src="img/covers/04.jpg" alt="" class="cover">
+            <img src="img/covers/05.jpg" alt="" class="cover">
+            <img src="img/covers/06.jpg" alt="" class="cover">
+            <img src="img/covers/07.jpg" alt="" class="cover">
+            <img src="img/covers/08.jpg" alt="" class="cover">
+          </div>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- FAQ 
+    <section class="faq-section" id="faq">
+      <h2 class="faq-title">FAQ</h2>
+
+      <div class="faq-grid">
+        <article class="faq-card">
+          <button class="faq-head" type="button" aria-expanded="true">
+            <h3>¿QUÉ ES EVEN?</h3>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-body">
+            <p>EVEN es más que una plataforma; es una comunidad que prospera gracias a la conexión directa entre los artistas y sus fanáticos.</p>
+            <p>Cuando compras un release en EVEN, no solo estás comprando música: obtienes acceso anticipado, contenido exclusivo, preferencia en boletos, merch y más.</p>
+          </div>
+        </article>
+
+        <article class="faq-card">
+          <button class="faq-head" type="button" aria-expanded="true">
+            <h3>¿CÓMO FUNCIONA EVEN?</h3>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-body">
+            <ol>
+              <li><b>Explora</b> el catálogo.</li>
+              <li><b>Compra</b> el release que quieras.</li>
+              <li><b>Accede</b> a beneficios exclusivos.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="faq-card">
+          <button class="faq-head" type="button" aria-expanded="true">
+            <h3>¿CÓMO SE BENEFICIAN LOS ARTISTAS?</h3>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-body">
+            <ol>
+              <li>Definen el precio.</li>
+              <li>Deciden recompensas.</li>
+              <li>Reciben pagos diarios.</li>
+              <li>Poseen y exportan sus datos.</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+
+      <div class="faq-cta">
+        <a href="#" class="btn-view-all">Ver todo</a>
+      </div>
+
+      <div class="social-row" aria-label="Redes sociales">-->
+        <!-- … iconos como los que ya incluiste … 
+      </div>
+    </section>-->
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="brand"><img src="img/KOOL - sin fondo.png" height="50" width="75" alt=""></span>
+            <span class="copy">COPYRIGHT © 2024 Ariel Moscarella Cea.</span>
+          </div>
+          <nav class="footer-nav">
+            <a href="#faq">Preguntas Frecuentes</a>
+            <a href="#">Para Artistas</a>
+            <a href="#">Guía del artista</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos de Servicio</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Si NO usas un bundler/React, cambia a .js (sin JSX) -->
+    <script src="js/artists.js"></script>
+</body>
+</html>

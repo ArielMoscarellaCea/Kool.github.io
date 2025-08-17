@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="img/KOOL - sin fondo.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 260px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(71, 85, 105, 0.5);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #b50000, #bb0000);
+            color: white;
+            box-shadow: 0 4px 12px rgba(182, 0, 0, 0.3);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .header-subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px 8px 40px;
+            color: white;
+            width: 250px;
+        }
+
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .action-btn {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 8px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: white;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card.purple { background: linear-gradient(135deg, #ffffff, #b50000); }
+        .stat-card.blue { background: linear-gradient(135deg, #ffffff, #b50000); }
+        .stat-card.cyan { background: linear-gradient(135deg, #ffffff, #b50000); }
+        .stat-card.teal { background: linear-gradient(135deg, #ffffff, #b50000); }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        .stat-change {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stat-change.positive {
+            background: #000000;
+            color: green;
+        }
+
+        .stat-change.negative {
+            background: #000000;
+            color: red;
+        }
+
+        .stat-title {
+            color: #000000;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            color: #000000;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .chart-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .chart-subtitle {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .chart-stats {
+            text-align: right;
+        }
+
+        .chart-value {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .chart-trend {
+            color: #6ee7b7;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .chart-container {
+            height: 200px;
+        }
+
+        /* Bottom Section */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .products-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .products-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .see-all-btn {
+            color: #b50000;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .see-all-btn:hover {
+            color: #930000;
+        }
+
+        .products-table {
+            width: 100%;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 60px;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .table-header span {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 60px;
+            gap: 16px;
+            align-items: center;
+            padding: 12px 0;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .table-row:hover {
+            background: rgba(71, 85, 105, 0.3);
+        }
+
+        .product-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .product-indicator.blue { background: #3b82f6; }
+        .product-indicator.green { background: #10b981; }
+        .product-indicator.cyan { background: #06b6d4; }
+        .product-indicator.purple { background: #8b5cf6; }
+
+        .product-text {
+            color: white;
+            font-size: 14px;
+        }
+
+        .product-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .product-stock {
+            color: #94a3b8;
+        }
+
+        .more-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .more-btn:hover {
+            color: white;
+        }
+
+        /* Tasks Card */
+        .tasks-card {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .tasks-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .progress-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-bg {
+            fill: none;
+            stroke: #374151;
+            stroke-width: 8;
+        }
+
+        .progress-bar {
+            fill: none;
+            stroke: url(#progressGradient);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 251;
+            stroke-dashoffset: 158;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .progress-value {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .progress-label {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .tasks-info {
+            text-align: center;
+        }
+
+        .tasks-description {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .tasks-link {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tasks-link:hover {
+            color: #a78bfa;
+        }
+
+        /* Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <a href="index.html"><span class="logo-text"><img src="img/KOOL - sin fondo.png" width="100" height="75" alt=""></span></a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="products">
+                        <span class="nav-icon">📅 </span>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="payments">
+                        <span class="nav-icon">💳</span>
+                        <span>Payments</span>
+                    </a>
+                </li>
+                <!--<li class="nav-item">
+                    <a href="#" class="nav-link" data-page="users">
+                        <span class="nav-icon">👥</span>
+                        <span>All users</span>
+                    </a>
+                </li>-->
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="reports">
+                        <span class="nav-icon">📈</span>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div>
+                    <h1 class="header-title">Dashboard</h1>
+                    <p class="header-subtitle">Welcome back!</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="Search here">
+                    </div>
+                    <button class="action-btn">🔔</button>
+                    <button class="action-btn">👤</button>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="stat-card purple">
+                    <div class="stat-header">
+                        <span class="stat-icon">📈</span>
+                        <span class="stat-change positive">+12%</span>
+                    </div>
+                    <div>
+                        <p class="stat-title">Today's visitors</p>
+                        <p class="stat-value">355,000</p>
+                    </div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-header">
+                        <span class="stat-icon">👥</span>
+                        <span class="stat-change positive">+8.2%</span>
+                    </div>
+                    <div>
+                        <p class="stat-title">Today's users</p>
+                        <p class="stat-value">12,000</p>
+                    </div>
+                </div>
+                <div class="stat-card cyan">
+                    <div class="stat-header">
+                        <span class="stat-icon">💰</span>
+                        <span class="stat-change negative">-15%</span>
+                    </div>
+                    <div>
+                        <p class="stat-title">Today's profit</p>
+                        <p class="stat-value">$120.4</p>
+                    </div>
+                </div>
+                <div class="stat-card teal">
+                    <div class="stat-header">
+                        <span class="stat-icon">📦</span>
+                        <span class="stat-change positive">+8%</span>
+                    </div>
+                    <div>
+                        <p class="stat-title">Revenue</p>
+                        <p class="stat-value">$250.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <h3 class="chart-title">Revenue</h3>
+                            <p class="chart-subtitle">Last 7 days vs 2 weeks ago</p>
+                        </div>
+                        <div class="chart-stats">
+                            <div class="chart-value">$28.2k</div>
+                            <div class="chart-trend">+12.5%</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <h3 class="chart-title">Users Activity</h3>
+                            <p class="chart-subtitle">Last 7 days</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Section -->
+            <section class="bottom-section">
+                <!-- Products Table -->
+                <div class="products-card">
+                    <div class="products-header">
+                        <h3 class="products-title">Top selling products</h3>
+                        <a href="#" class="see-all-btn">SEE ALL</a>
+                    </div>
+                    
+                    <div class="products-table">
+                        <div class="table-header">
+                            <span>Name</span>
+                            <span>Value</span>
+                            <span>In Stock</span>
+                            <span></span>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="product-name">
+                                <div class="product-indicator blue"></div>
+                                <span class="product-text">Logitech G502 HERO Gaming Mouse</span>
+                            </div>
+                            <span class="product-value">$76.89</span>
+                            <span class="product-stock">1500</span>
+                            <button class="more-btn">⋯</button>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="product-name">
+                                <div class="product-indicator green"></div>
+                                <span class="product-text">Razer Basilisk Ultimate RGB USB Gaming Headset</span>
+                            </div>
+                            <span class="product-value">$149.99</span>
+                            <span class="product-stock">870</span>
+                            <button class="more-btn">⋯</button>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="product-name">
+                                <div class="product-indicator cyan"></div>
+                                <span class="product-text">Razer Cynosa Chrome Gaming Keyboard</span>
+                            </div>
+                            <span class="product-value">$89.99</span>
+                            <span class="product-stock">1205</span>
+                            <button class="more-btn">⋯</button>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="product-name">
+                                <div class="product-indicator purple"></div>
+                                <span class="product-text">Razer Viper Mini Ultralight Gaming Device</span>
+                            </div>
+                            <span class="product-value">$79.99</span>
+                            <span class="product-stock">999</span>
+                            <button class="more-btn">⋯</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tasks Card -->
+                <div class="tasks-card">
+                    <h3 class="tasks-title">Your tasks</h3>
+                    
+                    <div class="progress-container">
+                        <div class="progress-circle">
+                            <svg class="progress-ring" width="120" height="120">
+                                <defs>
+                                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#8b5cf6"/>
+                                        <stop offset="100%" stop-color="#06b6d4"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle class="progress-bg" cx="60" cy="60" r="40"/>
+                                <circle class="progress-bar" cx="60" cy="60" r="40"/>
+                            </svg>
+                            <div class="progress-text">
+                                <div class="progress-value">37%</div>
+                                <div class="progress-label">Done</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tasks-info">
+                        <p class="tasks-description">You have completed 37% of your tasks</p>
+                        <a href="#" class="tasks-link">If you want see all of your tasks click here</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Initialize charts
+            initializeCharts();
+        });
+
+        function initializeCharts() {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueGradient = revenueCtx.createLinearGradient(0, 0, 400, 0);
+            revenueGradient.addColorStop(0, '#8b5cf6');
+            revenueGradient.addColorStop(1, '#06b6d4');
+
+            new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Oct 15', 'Oct 22', 'Oct 29', 'Nov 5', 'Nov 12', 'Nov 19', 'Nov 26'],
+                    datasets: [{
+                        data: [120, 140, 130, 180, 200, 220, 189],
+                        borderColor: revenueGradient,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        pointBackgroundColor: '#8b5cf6',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            display: false
+                        }
+                    },
+                    elements: {
+                        point: {
+                            hoverRadius: 8
+                        }
+                    }
+                }
+            });
+
+            // Activity Chart
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            const activityGradient = activityCtx.createLinearGradient(0, 0, 0, 200);
+            activityGradient.addColorStop(0, '#8b5cf6');
+            activityGradient.addColorStop(1, '#3b82f6');
+
+            new Chart(activityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        data: [65, 78, 90, 81, 56, 55, 40],
+                        backgroundColor: activityGradient,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            console.log('Searching for:', e.target.value);
+        });
+
+        // Action buttons
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('Action button clicked');
+            });
+        });
+
+        // More buttons in products table
+        document.querySelectorAll('.more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('More options clicked');
+            });
+        });
+    </script>
+</body>
+</html>
